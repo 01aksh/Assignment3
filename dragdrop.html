@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      section {
+        width: 1000px;
+        height: 360px;
+        display: flex;
+        justify-content: space-around;
+      }
+      h1 {
+        text-align: center;
+      }
+      .set1 {
+        background-color: rgb(255, 166, 0);
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        text-align: center;
+        width: 80%;
+      }
+      .set2 {
+        background-color: brown;
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        text-align: center;
+        width: 80%;
+      }
+      .set3 {
+        background-color: rgb(193, 218, 100);
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        text-align: center;
+        width: 80%;
+      }
+      p {
+        background-color: bisque;
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        text-align: center;
+        width: 70%;
+      }
+      .main1 {
+        border: 1px solid gray;
+        width: 10%;
+        padding: 5px;
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Drag And Drop</h1>
+    <section class="section">
+      <div class="main1">
+        <div class="set1">set1</div>
+        <p draggable="true">Item #1</p>
+        <p draggable="true">Item #2</p>
+        <p draggable="true">Item #3</p>
+        <p draggable="true">Item #4</p>
+        <p draggable="true">Item #5</p>
+        <p draggable="true">Item #6</p>
+      </div>
+      <div class="main1">
+        <div class="set2">set2</div>
+
+        <p draggable="true">Item #7</p>
+        <p draggable="true">Item #8</p>
+        <p draggable="true">Item #9</p>
+        <p draggable="true">Item #10</p>
+      </div>
+      <div class="main1">
+        <div class="set3">set3</div>
+
+        <p draggable="true">Item #1</p>
+        <p draggable="true">Item #2</p>
+        <p draggable="true">Item #3</p>
+        <p draggable="true">Item #4</p>
+      </div>
+      <div class="choice"></div>
+      <div class="choice"></div>
+
+      <div class="choice"></div>
+
+      <div class="choice"></div>
+    </section>
+  </body>
+</html>
+<script type="text/javascript">
+  var p = document.getElementsByTagName("p");
+  var choice = document.getElementsByClassName("main1");
+  var dragItem = null;
+
+  for (var i of p) {
+    i.addEventListener("dragstart", dragStart);
+    i.addEventListener("dragend", dragEnd);
+  }
+
+  function dragStart() {
+    dragItem = this;
+    setTimeout(() => (this.style.display = "none"), 0);
+  }
+  function dragEnd() {
+    setTimeout(() => (this.style.display = "block"), 0);
+    dragItem = null;
+  }
+
+  for (j of choice) {
+    j.addEventListener("dragover", dragOver);
+    j.addEventListener("dragenter", dragEnter);
+
+    j.addEventListener("dragleave", dragLeave);
+    j.addEventListener("drop", Drop);
+  }
+  function Drop() {
+    this.append(dragItem);
+  }
+  function dragOver(e) {
+    e.preventDefault();
+    this.style.border = "2px dotted cyan";
+  }
+  function dragEnter(e) {
+    e.preventDefault();
+  }
+  function dragLeave(e) {
+    e.preventDefault();
+    this.style.border = "none";
+  }
+</script>
